@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "@p233/stylelint-config-scss/order-bootstrap"
+  ],
+  "rules": {
+    "property-no-vendor-prefix": null
+  }
+}
