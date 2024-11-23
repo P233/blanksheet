@@ -4,7 +4,7 @@
   "description": "",
   "main": "blank.css",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -17,20 +17,20 @@
     "url": "https://github.com/P233/blank-css/issues"
   },
   "homepage": "https://github.com/P233/blank-css#readme",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "stylelint": "^16.12.0",
+    "stylelint-config-recess-order": "^5.1.1",
+    "stylelint-prettier": "^5.0.2"
+  },
   "lint-staged": {
     "*.html": [
       "prettier --write"
     ],
     "*.css": [
-      "prettier --write",
       "stylelint --fix"
     ]
-  },
-  "devDependencies": {
-    "@p233/stylelint-config-scss": "^3.1.1",
-    "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
-    "prettier": "^2.4.1",
-    "stylelint": "^14.0.1"
   }
 }

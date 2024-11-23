@@ -1,9 +1,3 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "@p233/stylelint-config-scss/order-bootstrap"
-  ],
-  "rules": {
-    "property-no-vendor-prefix": null
-  }
+  "extends": ["stylelint-config-recess-order", "stylelint-prettier/recommended"]
 }
