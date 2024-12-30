@@ -6,17 +6,17 @@
   "scripts": {
     "prepare": "husky"
   },
+  "keywords": [],
+  "homepage": "https://github.com/p233-studio/blank-css#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/P233/blank-css.git"
+    "url": "git+https://github.com/p233-studio/blank-css.git"
   },
-  "keywords": [],
-  "author": "Peiwen Lu",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/P233/blank-css/issues"
+    "url": "https://github.com/p233-studio/blank-css/issues"
   },
-  "homepage": "https://github.com/P233/blank-css#readme",
+  "license": "MIT",
+  "author": "Peiwen Lu",
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^15.3.0",
