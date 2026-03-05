@@ -1,0 +1,309 @@
+/**
+ * Blanksheet v1.0.0
+ * https://github.com/P233/blanksheet
+ *
+ * A principled CSS reset for custom design systems — eliminates hidden
+ * defaults, preserves text semantics, outputs a blank canvas.
+ *
+ * Principles:
+ *   P1 — Eliminate hidden layout (margin, padding, baseline gaps → zero)
+ *   P2 — Preserve text semantics (bold, italic, color, underline, monospace → keep)
+ *   P3 — Skip what users always override (heading font-size, form border/background → skip)
+ *   P4 — Apply real-world universal defaults (box-sizing, list-style, font inherit, spinners → set)
+ *   P5 — Normalize cross-browser inconsistencies (sub/sup, search, moz-focus, placeholder → fix)
+ *
+ * License: MIT
+ */
+
+@layer reset {
+  /* ==========================================================================
+   * Box Model
+   *
+   * [P4] border-box is the modern sizing standard.
+   * ======================================================================== */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* ==========================================================================
+   * Root & Body
+   *
+   * UA default: body — margin: 8px
+   *
+   * [P1] body margin: hidden layout.
+   * [P5] text-size-adjust: prevents mobile text inflation (Safari needs -webkit-).
+   *
+   * font-size and line-height are intentionally NOT set on :root.
+   * The UA defaults (16px / normal ~1.2) respect user browser preferences
+   * and provide readable text out of the box.
+   * ======================================================================== */
+
+  :root {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  /* ==========================================================================
+   * Sections
+   *
+   * UA default: h1–h6 — font-size: 2em..0.67em, font-weight: bold, margin-block
+   *
+   * [P1] margin: hidden layout → reset.
+   * [P2] font-weight: bold → semantic (importance) → keep.
+   * [P3] font-size → always overridden by design system → skip.
+   *
+   * Untouched: article, aside, footer, header, main, nav, section, hgroup
+   *            — structural only, no meaningful UA defaults.
+   * ======================================================================== */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+
+  /* ==========================================================================
+   * Grouping Content
+   *
+   * UA default: p          — margin-block: 1em
+   *             blockquote — margin-block: 1em, margin-inline: 40px
+   *             pre        — margin-block: 1em, font-family: monospace
+   *             figure     — margin-block: 1em, margin-inline: 40px
+   *             hr         — border, margin-block: 0.5em
+   *             dl         — margin-block: 1em
+   *             dd         — margin-inline-start: 40px
+   *
+   * [P1] margin, border: hidden layout → reset.
+   * [P2] pre monospace: semantic (code convention) → keep.
+   *
+   * Untouched: figcaption, dt, div, search — no meaningful UA defaults.
+   * ======================================================================== */
+
+  p,
+  blockquote,
+  figure,
+  pre,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  hr {
+    margin: 0;
+    border: 0;
+  }
+
+  /* ==========================================================================
+   * Text-level Semantics
+   *
+   * [P2] All text-level visual defaults are semantic → keep.
+   *   a       — color, text-decoration (link identity)
+   *   strong  — font-weight (importance)
+   *   em      — font-style (emphasis)
+   *   small   — font-size (fine print)
+   *   del     — text-decoration (deletion)
+   *   mark    — background (highlight)
+   *   abbr    — text-decoration (abbreviation)
+   *   q       — quotes (quoted speech)
+   *   code, kbd, samp — font-family (code convention)
+   *
+   * [P5] sub/sup: normalize positioning (from Normalize.css) to prevent
+   *   line-height disruption across engines while preserving visual offset.
+   * ======================================================================== */
+
+  sub,
+  sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  /* ==========================================================================
+   * Lists
+   *
+   * UA default: ul   — margin-block: 1em, padding-inline-start: 40px, list-style: disc
+   *             ol   — margin-block: 1em, padding-inline-start: 40px, list-style: decimal
+   *             menu — margin-block: 1em, padding-inline-start: 40px, list-style: disc
+   *
+   * [P1] margin, padding: hidden layout → reset.
+   * [P4] list-style: none — virtually always custom-built → reset.
+   * ======================================================================== */
+
+  ul,
+  ol,
+  menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* ==========================================================================
+   * Table
+   *
+   * UA default: table   — border-spacing: 2px, border-collapse: separate
+   *             caption — text-align: center
+   *             th      — font-weight: bold, text-align: center, padding: 1px
+   *             td      — padding: 1px
+   *
+   * [P1] padding, border-spacing: hidden layout → reset.
+   * [P4] border-collapse: collapse — virtually always needed → set.
+   * [P2] th font-weight, th/caption text-align: semantic → keep.
+   *
+   * Untouched: thead, tbody, tfoot, tr, colgroup, col — structural only.
+   * ======================================================================== */
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0;
+  }
+
+  /* ==========================================================================
+   * Forms
+   *
+   * UA default: button   — padding, border, background, text-align: center
+   *             input    — padding, border, background (system), color (system)
+   *             select   — padding, border, background (system)
+   *             textarea — padding, border, resize: both
+   *             fieldset — border: 2px groove, padding, margin-inline: 2px
+   *             legend   — padding-inline: 2px
+   *
+   * [P1] margin, padding: hidden layout → reset.
+   * [P4] font/color: inherit — form elements don't inherit by default,
+   *   a UA quirk that trips up every developer → fix.
+   * [P3] button/input/select/textarea border, background: always restyled → skip.
+   *   date, time, datetime-local, month, week, color, range
+   *   — design systems replace these entirely with custom components → skip.
+   * [P1] fieldset border: hidden layout (2px groove) → reset.
+   *   Unlike interactive controls, fieldset is a grouping element — developers
+   *   may use it without explicitly restyling, so the default border is surprising.
+   * [P5] ::-moz-focus-inner: Firefox adds inner padding/border → fix.
+   * [P5] [type="search"]: WebKit non-standard appearance → fix.
+   * [P4] number spinners: virtually always custom-built → remove.
+   * [P5] ::placeholder: Firefox renders at reduced opacity, others don't → fix.
+   * [P5] :-moz-ui-invalid: Firefox adds red box-shadow on invalid inputs,
+   *   others don't → fix.
+   *
+   * Untouched: optgroup, form, label, output, datalist, option
+   *            — no meaningful UA defaults.
+   * ======================================================================== */
+
+  button,
+  input,
+  select,
+  textarea {
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+  }
+
+  button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  [type="search"],
+  [type="number"] {
+    appearance: textfield;
+  }
+
+  [type="search"]::-webkit-search-decoration,
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+  }
+
+  ::placeholder {
+    opacity: 1;
+  }
+
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  legend {
+    padding: 0;
+  }
+
+  /* ==========================================================================
+   * Embedded / Media
+   *
+   * UA default: img, video, audio, canvas, svg — display: inline (baseline gap)
+   *             svg    — overflow: hidden
+   *             iframe — display: inline (baseline gap), border: 2px inset
+   *
+   * [P1] vertical-align: bottom — closes the baseline gap (invisible
+   *   vertical space from text baseline alignment) without switching to
+   *   display: block, preserving inline flow for SVG icons in buttons/links.
+   * [P1] iframe border: hidden layout → reset.
+   * [P3] meter, progress — design systems replace these entirely
+   *   with custom components → skip.
+   *
+   * Untouched: picture, source, map, area — structural or hidden.
+   * ======================================================================== */
+
+  img,
+  video,
+  audio,
+  canvas,
+  svg,
+  iframe,
+  embed,
+  object {
+    vertical-align: bottom;
+  }
+
+  iframe {
+    border: 0;
+  }
+
+  /* ==========================================================================
+   * Interactive
+   *
+   * UA default: summary — display: list-item (marker triangle)
+   *             dialog  — position: absolute, padding, border, background, color
+   *
+   * [P1] dialog padding: hidden layout → reset.
+   * [P3] dialog border, background, color: always restyled as a
+   *   complete visual component → skip.
+   * [P4] summary list-style: none — virtually always custom-built → reset.
+   * ======================================================================== */
+
+  dialog {
+    padding: 0;
+  }
+
+  summary {
+    list-style: none;
+  }
+}

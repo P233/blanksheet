@@ -1,72 +1,452 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Document</title>
-    <link href="./blank.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 All Tags</title>
+    <link href="./blanksheet.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>Heading 1</h1>
-    <h2>Heading 2</h2>
-    <h3>Heading 3</h3>
-    <h4>Heading 4</h4>
-    <h5>Heading 5</h5>
-    <h6>Heading 6</h6>
+    <!-- Document Structure -->
+    <header>
+      <h1>HTML5 All Tags</h1>
+      <nav>
+        <ul>
+          <li><a href="#headings">Headings</a></li>
+          <li><a href="#text">Text</a></li>
+          <li><a href="#lists">Lists</a></li>
+          <li><a href="#tables">Tables</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#editable">Editable</a></li>
+          <li><a href="#interactive">Interactive</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <p>
-      Morbi non arcu risus, quis <a href="/">Link</a> varius quam quisque id
-      diam vel quam <strong>elementum</strong> pulvinar etiam non quam lacus
-      suspendisse faucibus interdum posuere lorem ipsum dolor sit amet,
-      consectetur adipiscing elit. Tincidunt dui ut ornare lectus sit amet est
-      placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis
-      aliquam.
-    </p>
+    <main>
+      <!-- Section 1: Headings & Structure -->
+      <section id="headings">
+        <h2>Headings & Structure</h2>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
 
-    <blockquote>
-      Gravida rutrum quisque non tellus orci, ac auctor! Nisl, condimentum id
-      venenatis a, condimentum vitae sapien pellentesque habitant morbi
-      tristique senectus et netus et malesuada fames ac turpis egestas sed
-      tempus, urna et pharetra pharetra! Felis donec et odio pellentesque.
-    </blockquote>
+        <article>
+          <h3>Article Example</h3>
+          <p>This is an independent article content.</p>
+        </article>
 
-    <ul>
-      <li>Vitae congue eu, consequat!</li>
-      <li>Quisque sagittis, purus sit.</li>
-      <li>Morbi tristique senectus et.</li>
-      <li>Rhoncus dolor purus non?</li>
-    </ul>
+        <aside>
+          <h3>Aside Content</h3>
+          <p>This is sidebar content.</p>
+        </aside>
 
-    <ol>
-      <li>Vitae congue eu, consequat!</li>
-      <li>Quisque sagittis, purus sit.</li>
-      <li>Morbi tristique senectus et.</li>
-      <li>Rhoncus dolor purus non?</li>
-    </ol>
+        <address>
+          Contact info:<br />
+          John Doe<br />
+          123 Street, City<br />
+          Email: john@example.com
+        </address>
 
-    <button>Button</button>
+        <hgroup>
+          <h2>Main Title</h2>
+          <p>Subtitle using hgroup</p>
+        </hgroup>
+      </section>
 
-    <input type="text" placeholder="text input" />
-    <input type="email" placeholder="email input" />
-    <input type="number" placeholder="number input" />
-    <input type="password" placeholder="password input" />
-    <input type="search" placeholder="search input" />
-    <input type="tel" placeholder="tel input" />
-    <input type="url" placeholder="url input" />
-    <input type="button" value="button input" />
-    <input type="submit" value="submit input" />
-    <input type="reset" value="reset input" />
+      <!-- Section 2: Text Tags -->
+      <section id="text">
+        <h2>Text Tags</h2>
+        <hr />
+        <p>
+          Regular paragraph with an <a href="#">inline link</a> and
+          <strong>strong text</strong> mixed together for testing inline elements within flowing
+          content.
+        </p>
+        <p><strong>Bold text using strong</strong></p>
+        <p><b>Bold text using b</b></p>
+        <p><em>Italic text using em</em></p>
+        <p><i>Italic text using i</i></p>
+        <p><u>Underlined text using u</u></p>
+        <p><s>Strikethrough text using s</s></p>
+        <p><mark>Highlighted text</mark></p>
+        <p><small>Small text</small></p>
+        <p><del>Deleted text</del></p>
+        <p><ins>Inserted text</ins></p>
+        <p>Text with <sub>subscript</sub></p>
+        <p>Text with <sup>superscript</sup></p>
+        <p><abbr title="World Health Organization">WHO</abbr></p>
+        <p><cite>Citation text</cite></p>
+        <p><dfn>Definition term</dfn></p>
+        <p><q>Inline quotation using q</q></p>
+        <p><code>Code text</code></p>
+        <p><kbd>Keyboard input</kbd></p>
+        <p><samp>Sample output</samp></p>
+        <p><var>Variable</var></p>
+        <p><time datetime="2026-01-01">January 1, 2026</time></p>
+        <p><data value="42">Forty-two</data></p>
+        <p>Text direction: <bdi>مرحبا</bdi> embedded</p>
+        <p><bdo dir="rtl">Right to left text</bdo></p>
+        <p>Long<wbr />wordwith<wbr />breakpoints</p>
+        <p>
+          <ruby> 汉 <rp>(</rp><rt>hàn</rt><rp>)</rp> 字 <rp>(</rp><rt>zì</rt><rp>)</rp> </ruby>
+        </p>
+        <pre>
+Preformatted
+    text with
+        spacing</pre
+        >
+        <blockquote>
+          This is a block quote.
+          <footer>- Author Name</footer>
+        </blockquote>
+      </section>
 
-    <!-- <input type="checkbox" />
-         <input type="color" />
-         <input type="date" />
-         <input type="datetime-local" />
-         <input type="file" />
-         <input type="hidden" />
-         <input type="image" />
-         <input type="month" />
-         <input type="radio" />
-         <input type="range" />
-         <input type="time" />
-         <input type="week" /> -->
+      <!-- Section 3: Lists -->
+      <section id="lists">
+        <h2>Lists</h2>
+
+        <h3>Unordered List</h3>
+        <ul>
+          <li>First item</li>
+          <li>Second item</li>
+          <li>
+            Third item with nested list
+            <ul>
+              <li>Nested item 1</li>
+              <li>Nested item 2</li>
+            </ul>
+          </li>
+          <li>Fourth item</li>
+        </ul>
+
+        <h3>Ordered List</h3>
+        <ol>
+          <li>First item</li>
+          <li>Second item</li>
+          <li>
+            Third item with nested list
+            <ol>
+              <li>Nested item 1</li>
+              <li>Nested item 2</li>
+            </ol>
+          </li>
+          <li>Fourth item</li>
+        </ol>
+
+        <h3>Definition List</h3>
+        <dl>
+          <dt>Term 1</dt>
+          <dd>Definition for term 1</dd>
+          <dt>Term 2</dt>
+          <dd>Definition for term 2</dd>
+          <dd>Additional definition for term 2</dd>
+        </dl>
+
+        <h3>Menu</h3>
+        <menu>
+          <li>Menu item 1</li>
+          <li>Menu item 2</li>
+          <li>Menu item 3</li>
+        </menu>
+      </section>
+
+      <!-- Section 4: Table Tags -->
+      <section id="tables">
+        <h2>Table Tags</h2>
+
+        <table>
+          <caption>
+            Table Caption
+          </caption>
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+              <th>Header 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data 1</td>
+              <td>Data 2</td>
+              <td rowspan="2">Rowspan</td>
+            </tr>
+            <tr>
+              <td>Data 4</td>
+              <td>Data 5</td>
+            </tr>
+            <tr>
+              <td colspan="2">Colspan</td>
+              <td>Data 9</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Footer 1</td>
+              <td>Footer 2</td>
+              <td>Footer 3</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <!-- Section 5: Form Tags -->
+      <section id="forms">
+        <h2>Form Tags</h2>
+
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Text Inputs</legend>
+
+            <label for="text-input">Text:</label>
+            <input
+              type="text"
+              id="text-input"
+              name="text-input"
+              placeholder="Text input"
+            /><br /><br />
+
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password input"
+            /><br /><br />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email input" /><br /><br />
+
+            <label for="url">URL:</label>
+            <input type="url" id="url" name="url" placeholder="URL input" /><br /><br />
+
+            <label for="tel">Tel:</label>
+            <input type="tel" id="tel" name="tel" placeholder="Tel input" /><br /><br />
+
+            <label for="search">Search:</label>
+            <input type="search" id="search" name="search" placeholder="Search input" /><br /><br />
+
+            <label for="number">Number:</label>
+            <input type="number" id="number" name="number" placeholder="Number input" /><br /><br />
+
+            <label for="textarea">Textarea:</label><br />
+            <textarea
+              id="textarea"
+              name="textarea"
+              rows="4"
+              cols="50"
+              placeholder="Textarea placeholder"
+            ></textarea>
+          </fieldset>
+
+          <fieldset>
+            <legend>Date & Time Inputs</legend>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" /><br /><br />
+
+            <label for="datetime-local">Datetime-local:</label>
+            <input type="datetime-local" id="datetime-local" name="datetime-local" /><br /><br />
+
+            <label for="month">Month:</label>
+            <input type="month" id="month" name="month" /><br /><br />
+
+            <label for="week">Week:</label>
+            <input type="week" id="week" name="week" /><br /><br />
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" />
+          </fieldset>
+
+          <fieldset>
+            <legend>Other Inputs</legend>
+
+            <label for="color">Color:</label>
+            <input type="color" id="color" name="color" /><br /><br />
+
+            <label for="range">Range:</label>
+            <input type="range" id="range" name="range" /><br /><br />
+
+            <label for="file">File:</label>
+            <input type="file" id="file" name="file" /><br /><br />
+
+            <input type="hidden" name="hidden" value="hidden-value" />
+
+            <input type="checkbox" id="checkbox1" name="checkbox1" />
+            <label for="checkbox1">Checkbox 1</label>
+            <input type="checkbox" id="checkbox2" name="checkbox2" checked />
+            <label for="checkbox2">Checkbox 2 (checked)</label><br /><br />
+
+            <input type="radio" id="radio1" name="radio" value="1" />
+            <label for="radio1">Radio 1</label>
+            <input type="radio" id="radio2" name="radio" value="2" checked />
+            <label for="radio2">Radio 2 (checked)</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Select, Datalist & Output</legend>
+
+            <label for="select">Select:</label>
+            <select id="select" name="select">
+              <optgroup label="Group 1">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </optgroup>
+              <optgroup label="Group 2">
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+              </optgroup></select
+            ><br /><br />
+
+            <label for="select-multiple">Select Multiple:</label>
+            <select id="select-multiple" name="select-multiple" multiple>
+              <option value="a">Option A</option>
+              <option value="b">Option B</option>
+              <option value="c">Option C</option></select
+            ><br /><br />
+
+            <label for="datalist-input">Datalist:</label>
+            <input
+              list="browsers"
+              id="datalist-input"
+              name="datalist-input"
+              placeholder="Type to search"
+            />
+            <datalist id="browsers">
+              <option value="Chrome"></option>
+              <option value="Firefox"></option>
+              <option value="Safari"></option>
+              <option value="Edge"></option></datalist
+            ><br /><br />
+
+            <label for="output">Output:</label>
+            <output id="output" name="output">42</output>
+          </fieldset>
+
+          <fieldset>
+            <legend>Meters, Progress & Buttons</legend>
+
+            <label>Meter:</label>
+            <meter value="0.6">60%</meter><br /><br />
+
+            <label>Progress:</label>
+            <progress value="70" max="100">70%</progress><br /><br />
+
+            <button type="submit">Submit Button</button>
+            <button type="reset">Reset Button</button>
+            <button type="button">Regular Button</button><br /><br />
+
+            <input type="submit" value="Submit Input" />
+            <input type="reset" value="Reset Input" />
+            <input type="button" value="Button Input" />
+            <input type="image" src="https://placehold.co/80x30" alt="Image Input" />
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Section 6: Media & Embedded Tags -->
+      <section id="media">
+        <h2>Media & Embedded Tags</h2>
+
+        <figure>
+          <img src="https://placehold.co/600x400" alt="Placeholder image" />
+          <figcaption>Figure caption text</figcaption>
+        </figure>
+
+        <picture>
+          <source srcset="https://placehold.co/800x400" media="(min-width: 800px)" />
+          <source srcset="https://placehold.co/400x400" media="(min-width: 400px)" />
+          <img src="https://placehold.co/200x200" alt="Responsive image" />
+        </picture>
+
+        <img src="https://placehold.co/300x200" alt="Image with map" usemap="#image-map" />
+        <map name="image-map">
+          <area shape="rect" coords="0,0,150,100" href="#" alt="Left area" />
+          <area shape="rect" coords="150,0,300,100" href="#" alt="Right area" />
+          <area shape="circle" coords="150,150,50" href="#" alt="Circle area" />
+        </map>
+
+        <audio controls>
+          <source src="audio.mp3" type="audio/mpeg" />
+          Your browser does not support audio.
+        </audio>
+
+        <video width="320" height="240" controls>
+          <source src="video.mp4" type="video/mp4" />
+          <track kind="subtitles" src="subtitles.vtt" srclang="en" label="English" />
+          Your browser does not support video.
+        </video>
+
+        <canvas id="myCanvas" width="200" height="100">
+          Your browser does not support canvas.
+        </canvas>
+
+        <svg width="100" height="100">
+          <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+        </svg>
+
+        <iframe src="about:blank" width="300" height="150" title="Iframe example"></iframe>
+
+        <object data="https://placehold.co/200x100" type="image/png" width="200" height="100">
+          Object fallback text
+        </object>
+
+        <embed type="image/png" src="https://placehold.co/200x100" width="200" height="100" />
+      </section>
+
+      <!-- Section 7: Editable Content -->
+      <section id="editable">
+        <h2>Editable Content</h2>
+        <div contenteditable="true">This div is contenteditable. Try editing this text.</div>
+        <p contenteditable="true">This paragraph is contenteditable.</p>
+        <div contenteditable="false">This div has contenteditable="false" — not editable.</div>
+      </section>
+
+      <!-- Section 8: Interactive Tags -->
+      <section id="interactive">
+        <h2>Interactive Tags</h2>
+
+        <details>
+          <summary>Click to expand details</summary>
+          <p>Hidden content revealed by details/summary.</p>
+        </details>
+
+        <details open>
+          <summary>Already open details</summary>
+          <p>This details element is open by default.</p>
+        </details>
+
+        <!-- Inline dialog (no backdrop) -->
+        <dialog open>
+          <p>This is an open dialog element.</p>
+        </dialog>
+
+        <!-- Modal dialog — ::backdrop should be transparent -->
+        <button onclick="document.getElementById('modal-dialog').showModal()">
+          Open Modal Dialog
+        </button>
+        <dialog id="modal-dialog">
+          <p>Modal dialog. Backdrop should be transparent (no semi-transparent overlay).</p>
+          <button onclick="document.getElementById('modal-dialog').close()">Close</button>
+        </dialog>
+      </section>
+    </main>
+
+    <footer>
+      <p>Page Footer Content</p>
+      <noscript>
+        <p>JavaScript is disabled in your browser.</p>
+      </noscript>
+    </footer>
   </body>
 </html>
