@@ -1,14 +1,14 @@
 /**
- * Blanksheet v1.0.0
+ * Blanksheet v1.0.1
  * https://github.com/P233/blanksheet
  *
- * A principled CSS reset for custom design systems — eliminates hidden
+ * A principled CSS reset — eliminates implicit
  * defaults, preserves text semantics, outputs a blank canvas.
  *
  * Principles:
- *   P1 — Eliminate hidden layout (margin, padding, baseline gaps → zero)
+ *   P1 — Eliminate implicit layout (margin, padding, vertical-align → zero)
  *   P2 — Preserve text semantics (bold, italic, color, underline, monospace → keep)
- *   P3 — Skip what users always override (heading font-size, form border/background → skip)
+ *   P3 — Skip what developers always override (heading font-size, border, background → skip)
  *   P4 — Apply real-world universal defaults (box-sizing, list-style, font inherit, spinners → set)
  *   P5 — Normalize cross-browser inconsistencies (sub/sup, search, moz-focus, placeholder → fix)
  *
@@ -33,7 +33,7 @@
    *
    * UA default: body — margin: 8px
    *
-   * [P1] body margin: hidden layout.
+   * [P1] body margin: implicit layout.
    * [P5] text-size-adjust: prevents mobile text inflation (Safari needs -webkit-).
    *
    * font-size and line-height are intentionally NOT set on :root.
@@ -55,9 +55,9 @@
    *
    * UA default: h1–h6 — font-size: 2em..0.67em, font-weight: bold, margin-block
    *
-   * [P1] margin: hidden layout → reset.
+   * [P1] margin: implicit layout → reset.
    * [P2] font-weight: bold → semantic (importance) → keep.
-   * [P3] font-size → always overridden by design system → skip.
+   * [P3] font-size → always overridden → skip.
    *
    * Untouched: article, aside, footer, header, main, nav, section, hgroup
    *            — structural only, no meaningful UA defaults.
@@ -79,11 +79,12 @@
    *             blockquote — margin-block: 1em, margin-inline: 40px
    *             pre        — margin-block: 1em, font-family: monospace
    *             figure     — margin-block: 1em, margin-inline: 40px
-   *             hr         — border, margin-block: 0.5em
+   *             hr         — margin-block: 0.5em, border
    *             dl         — margin-block: 1em
    *             dd         — margin-inline-start: 40px
    *
-   * [P1] margin, border: hidden layout → reset.
+   * [P1] margin: implicit layout → reset.
+   * [P3] hr border: always overridden in practice → skip.
    * [P2] pre monospace: semantic (code convention) → keep.
    *
    * Untouched: figcaption, dt, div, search — no meaningful UA defaults.
@@ -93,14 +94,10 @@
   blockquote,
   figure,
   pre,
+  hr,
   dl,
   dd {
     margin: 0;
-  }
-
-  hr {
-    margin: 0;
-    border: 0;
   }
 
   /* ==========================================================================
@@ -144,7 +141,7 @@
    *             ol   — margin-block: 1em, padding-inline-start: 40px, list-style: decimal
    *             menu — margin-block: 1em, padding-inline-start: 40px, list-style: disc
    *
-   * [P1] margin, padding: hidden layout → reset.
+   * [P1] margin, padding: implicit layout → reset.
    * [P4] list-style: none — virtually always custom-built → reset.
    * ======================================================================== */
 
@@ -164,15 +161,17 @@
    *             th      — font-weight: bold, text-align: center, padding: 1px
    *             td      — padding: 1px
    *
-   * [P1] padding, border-spacing: hidden layout → reset.
+   * [P1] padding: implicit layout → reset.
    * [P4] border-collapse: collapse — virtually always needed → set.
+   *
+   * border-spacing is not reset: it only applies under border-collapse: separate,
+   * and anyone using separate will define their own spacing.
    * [P2] th font-weight, th/caption text-align: semantic → keep.
    *
    * Untouched: thead, tbody, tfoot, tr, colgroup, col — structural only.
    * ======================================================================== */
 
   table {
-    border-spacing: 0;
     border-collapse: collapse;
   }
 
@@ -191,15 +190,13 @@
    *             fieldset — border: 2px groove, padding, margin-inline: 2px
    *             legend   — padding-inline: 2px
    *
-   * [P1] margin, padding: hidden layout → reset.
+   * [P1] margin, padding: implicit layout → reset.
    * [P4] font/color: inherit — form elements don't inherit by default,
    *   a UA quirk that trips up every developer → fix.
-   * [P3] button/input/select/textarea border, background: always restyled → skip.
+   * [P3] border, background: always overridden in practice → skip.
+   *   Applies to all form controls including fieldset.
    *   date, time, datetime-local, month, week, color, range
-   *   — design systems replace these entirely with custom components → skip.
-   * [P1] fieldset border: hidden layout (2px groove) → reset.
-   *   Unlike interactive controls, fieldset is a grouping element — developers
-   *   may use it without explicitly restyling, so the default border is surprising.
+   *   — always replaced entirely with custom components → skip.
    * [P5] ::-moz-focus-inner: Firefox adds inner padding/border → fix.
    * [P5] [type="search"]: WebKit non-standard appearance → fix.
    * [P4] number spinners: virtually always custom-built → remove.
@@ -248,7 +245,6 @@
   fieldset {
     padding: 0;
     margin: 0;
-    border: 0;
   }
 
   legend {
@@ -265,8 +261,8 @@
    * [P1] vertical-align: bottom — closes the baseline gap (invisible
    *   vertical space from text baseline alignment) without switching to
    *   display: block, preserving inline flow for SVG icons in buttons/links.
-   * [P1] iframe border: hidden layout → reset.
-   * [P3] meter, progress — design systems replace these entirely
+   * [P3] iframe border: always overridden in practice → skip.
+   * [P3] meter, progress — always replaced entirely
    *   with custom components → skip.
    *
    * Untouched: picture, source, map, area — structural or hidden.
@@ -283,17 +279,13 @@
     vertical-align: bottom;
   }
 
-  iframe {
-    border: 0;
-  }
-
   /* ==========================================================================
    * Interactive
    *
    * UA default: summary — display: list-item (marker triangle)
    *             dialog  — position: absolute, padding, border, background, color
    *
-   * [P1] dialog padding: hidden layout → reset.
+   * [P1] dialog padding: implicit layout → reset.
    * [P3] dialog border, background, color: always restyled as a
    *   complete visual component → skip.
    * [P4] summary list-style: none — virtually always custom-built → reset.

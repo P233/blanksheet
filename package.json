@@ -1,7 +1,7 @@
 {
   "name": "blanksheet",
-  "version": "1.0.0",
-  "description": "A CSS reset for modern browsers. Eliminates hidden defaults, preserves text semantics, outputs a blank canvas.",
+  "version": "1.0.1",
+  "description": "A CSS reset for modern browsers. Eliminates implicit defaults, preserves text semantics, outputs a blank canvas.",
   "type": "module",
   "main": "blanksheet.min.css",
   "style": "blanksheet.min.css",

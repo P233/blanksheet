@@ -1,16 +1,17 @@
 # Blanksheet
 
 [![npm](https://img.shields.io/npm/v/blanksheet)](https://www.npmjs.com/package/blanksheet)
+![size](https://img.shields.io/badge/size-<1KB-blue)
 [![License: MIT](https://img.shields.io/npm/l/blanksheet)](LICENSE)
 
-A principled CSS reset for custom design systems — eliminates hidden defaults, preserves text semantics, skips what you'll override anyway. < 1kB minified.
+A principled CSS reset — eliminates implicit defaults, preserves text semantics, skips what you'll override anyway.
 
 ## Principles
 
-1. **Eliminate hidden layout** — zero margin, padding, baseline gaps. Nothing running in background.
-2. **Preserve text semantics** — keep any UA style that carries meaning (`<strong>` bold, `<em>` italic, `<a>` blue, `<del>` strikethrough, heading size/weight, `<code>` monospace).
-3. **Skip what users always override** — heading `font-size`, form `border`/`background`, dialog visuals, `::backdrop`. Elements that design systems replace entirely (`meter`, `progress`, native date/time pickers) are also skipped.
-4. **Apply real-world universal defaults** — `body { margin: 0 }`, `list-style: none`, `border-collapse`, form `font: inherit`, `box-sizing: border-box`, number spinner removal.
+1. **Eliminate implicit layout** — zero margin, padding, vertical-align. Purely spatial properties only.
+2. **Preserve text semantics** — keep any UA style that visually conveys meaning (`<strong>` bold, `<em>` italic, `<a>` color/underline, `<del>` strikethrough, heading weight, `<code>` monospace).
+3. **Skip what developers always override** — heading `font-size`, `border`, `background`, dialog visuals, `::backdrop`. Elements always replaced with custom components (`<meter>`, `<progress>`, specialized inputs) are also skipped.
+4. **Apply real-world universal defaults** — `list-style: none`, `border-collapse`, form `font: inherit`, `box-sizing: border-box`, number spinner removal.
 5. **Normalize cross-browser inconsistencies** — `sub`/`sup` line-height, WebKit search appearance, Firefox `::-moz-focus-inner`, mobile `text-size-adjust`, `::placeholder` opacity, Firefox `:-moz-ui-invalid`.
 
 No opinions (`cursor: pointer`, `font-smoothing`). No `!important`. No structural elements (`div`, `span`, `section`).
@@ -21,9 +22,14 @@ All rules live inside `@layer reset` — the lowest cascade priority. Any unlaye
 
 ```css
 @layer reset {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0;
-    /* font-size and font-weight: kept (text semantics) */
+    /* font-weight: kept (text semantics); font-size: skipped (always overridden) */
   }
 }
 ```
