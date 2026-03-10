@@ -59,6 +59,7 @@ Where browsers disagree on rendering, standardize.
 - `-webkit-text-size-adjust: 100%` — prevent mobile text inflation (Safari requires `-webkit-` prefix).
 - `::placeholder` — Firefox renders at reduced opacity, Chrome/Safari don't → normalize to `opacity: 1`.
 - `:-moz-ui-invalid` — Firefox adds red `box-shadow` on invalid form elements, Chrome/Safari don't → remove.
+- `summary::-webkit-details-marker` — Safari < 18.4 does not support `list-style: none` on summary, renders triangle via proprietary pseudo-element → hide. Remove when Safari < 18.4 drops below 1% global share (~2027).
 
 **Boundary:** Addresses inter-browser divergence only. If all browsers agree, apply principles 1–4 instead.
 

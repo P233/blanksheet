@@ -12,7 +12,7 @@ A principled CSS reset — eliminates implicit defaults, preserves text semantic
 2. **Preserve text semantics** — keep any UA style that visually conveys meaning (`<strong>` bold, `<em>` italic, `<a>` color/underline, `<del>` strikethrough, heading weight, `<code>` monospace).
 3. **Skip what developers always override** — heading `font-size`, `border`, `background`, dialog visuals, `::backdrop`. Elements always replaced with custom components (`<meter>`, `<progress>`, specialized inputs) are also skipped.
 4. **Apply real-world universal defaults** — `list-style: none`, `border-collapse`, form `font: inherit`, `box-sizing: border-box`, number spinner removal.
-5. **Normalize cross-browser inconsistencies** — `sub`/`sup` line-height, WebKit search appearance, Firefox `::-moz-focus-inner`, mobile `text-size-adjust`, `::placeholder` opacity, Firefox `:-moz-ui-invalid`.
+5. **Normalize cross-browser inconsistencies** — `sub`/`sup` line-height, WebKit search appearance, Firefox `::-moz-focus-inner`, mobile `text-size-adjust`, `::placeholder` opacity, Firefox `:-moz-ui-invalid`, Safari `summary` marker.
 
 No opinions (`cursor: pointer`, `font-smoothing`). No `!important`. No structural elements (`div`, `span`, `section`).
 
@@ -35,6 +35,8 @@ All rules live inside `@layer reset` — the lowest cascade priority. Any unlaye
 ```
 
 Chrome 99+, Firefox 97+, Safari 15.4+.
+
+Safari < 18.4 does not support `list-style: none` on `<summary>` and renders the disclosure triangle via a proprietary `::-webkit-details-marker` pseudo-element. A workaround is included and will be removed when Safari < 18.4 drops below 1% global share.
 
 ## Usage
 

@@ -1,5 +1,5 @@
 /**
- * Blanksheet v1.0.1
+ * Blanksheet v1.0.2
  * https://github.com/P233/blanksheet
  *
  * A principled CSS reset — eliminates implicit
@@ -297,5 +297,16 @@
 
   summary {
     list-style: none;
+  }
+
+  /*
+   * [P5] Safari < 18.4 does not support list-style: none on summary and
+   * renders the disclosure triangle via a proprietary pseudo-element.
+   * Safari 18.4 (March 2025) reimplemented it as a standard ::marker.
+   *
+   * TODO: Remove when Safari < 18.4 drops below 1% global share (~2027).
+   */
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
