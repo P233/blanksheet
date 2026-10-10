@@ -1,3 +1,5 @@
 node_modules
 blanksheet.min.css
+*.tgz
+.DS_Store
 .vscode
