@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HTML5 All Tags</title>
+    <title>Blanksheet kitchen sink</title>
     <link href="./blanksheet.css" rel="stylesheet" />
   </head>
   <body>
@@ -239,6 +239,19 @@ Preformatted
             <label for="number">Number:</label>
             <input type="number" id="number" name="number" placeholder="Number input" /><br /><br />
 
+            <label for="disabled-input">Disabled:</label>
+            <input
+              type="text"
+              id="disabled-input"
+              name="disabled-input"
+              value="Disabled input"
+              disabled
+            />
+            <select id="disabled-select" name="disabled-select" disabled>
+              <option>Disabled select</option>
+            </select>
+            <button type="button" disabled>Disabled button</button><br /><br />
+
             <label for="textarea">Textarea:</label><br />
             <textarea
               id="textarea"
@@ -431,12 +444,12 @@ Preformatted
           <p>This is an open dialog element.</p>
         </dialog>
 
-        <!-- Modal dialog — ::backdrop should be transparent -->
+        <!-- Modal dialog — keeps the browser panel and backdrop; page behind is inert -->
         <button onclick="document.getElementById('modal-dialog').showModal()">
           Open Modal Dialog
         </button>
         <dialog id="modal-dialog">
-          <p>Modal dialog. Backdrop should be transparent (no semi-transparent overlay).</p>
+          <p>Modal dialog. The browser panel and backdrop are kept.</p>
           <button onclick="document.getElementById('modal-dialog').close()">Close</button>
         </dialog>
       </section>

@@ -1,23 +1,27 @@
 {
   "name": "blanksheet",
-  "version": "1.0.2",
-  "description": "A CSS reset for modern browsers. Eliminates implicit defaults, preserves text semantics, outputs a blank canvas.",
+  "version": "2.0.0",
+  "description": "A CSS reset with an explicit baseline for humans and agents: blanked defaults, normalized rules, and documented survivors.",
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "main": "blanksheet.min.css",
   "style": "blanksheet.min.css",
   "scripts": {
     "prepare": "husky",
     "lint:check": "stylelint blanksheet.css",
     "lint:fix": "stylelint --fix blanksheet.css",
+    "format:check": "prettier --check README.md AGENTS.md CLAUDE.md CHANGELOG.md package.json pnpm-workspace.yaml kitchen-sink.html tests",
     "build": "lightningcss --minify blanksheet.css -o blanksheet.min.css",
-    "prepublishOnly": "pnpm build"
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "prepack": "npm run build"
   },
   "keywords": [
     "css",
     "reset",
     "css-reset",
     "normalize",
-    "design-system",
+    "ai",
+    "agents",
     "blanksheet"
   ],
   "homepage": "https://github.com/P233/blanksheet#readme",
@@ -30,7 +34,8 @@
   },
   "files": [
     "blanksheet.css",
-    "blanksheet.min.css"
+    "blanksheet.min.css",
+    "CHANGELOG.md"
   ],
   "license": "MIT",
   "author": "Peiwen Lu",
@@ -38,19 +43,15 @@
     "husky": "^9.1.7",
     "lightningcss-cli": "^1.31.1",
     "lint-staged": "^16.3.0",
+    "playwright": "1.63.0",
     "prettier": "^3.8.1",
     "stylelint": "^17.4.0",
     "stylelint-config-recess-order": "^7.6.1",
     "stylelint-order": "^7.0.1",
     "stylelint-prettier": "^5.0.3"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "lightningcss-cli"
-    ]
-  },
   "lint-staged": {
-    "*.html": [
+    "*.{html,md,json,yaml,mjs}": [
       "prettier --write"
     ],
     "*.css": [

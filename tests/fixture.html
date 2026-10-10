@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Blanksheet browser regression fixture</title>
+    <style>
+      @layer reset, consumer;
+      @layer consumer {
+        .layered {
+          margin: 9px;
+          font-size: 27px;
+        }
+      }
+      html {
+        color-scheme: light dark;
+        font-size: 125%;
+      }
+      body {
+        color: CanvasText;
+        background: Canvas;
+        word-spacing: 3px;
+        letter-spacing: 1px;
+      }
+      .override {
+        margin: 12px;
+        font-size: 30px;
+      }
+      .vertical {
+        height: 60px;
+        writing-mode: vertical-rl;
+      }
+      .light-weight {
+        font-weight: 300;
+      }
+      .system-disabled {
+        color: GrayText;
+      }
+      .oversized {
+        width: 1800px;
+        height: 1800px;
+      }
+      .bordered {
+        border-color: rgb(0, 128, 0);
+      }
+      .positioned {
+        position: relative;
+        height: 40px;
+      }
+      .tall {
+        height: 200px;
+      }
+      .recolored {
+        color: rgb(200, 0, 0);
+      }
+    </style>
+  </head>
+  <body id="body">
+    <button id="focus-start" type="button">Keyboard start</button>
+    <button id="button" type="button">Button</button>
+    <h1 id="heading">Heading</h1>
+    <p id="paragraph">
+      Body <strong id="strong">strong</strong> <em id="em">emphasis</em>
+      <a id="link" href="#paragraph">link</a> <code id="code">code</code>
+    </p>
+    <p class="light-weight"><strong id="light-strong">Strong at light weight</strong></p>
+    <pre id="pre">preformatted</pre>
+    <p>A<sub id="sub">sub</sub>B<sup id="sup">sup</sup></p>
+    <hr id="hr" />
+    <div class="vertical"><hr id="vertical-hr" /></div>
+    <ul id="list">
+      <li>One</li>
+    </ul>
+    <ol id="ordered">
+      <li>Two</li>
+    </ol>
+    <menu id="menu"><li>Three</li></menu>
+    <div class="bordered">
+      <table id="table">
+        <caption id="caption">
+          Table
+        </caption>
+        <tr>
+          <th id="th">Heading</th>
+          <td id="td">Data</td>
+        </tr>
+      </table>
+    </div>
+    <fieldset id="fieldset">
+      <legend id="legend">Fields</legend>
+      <input id="input" aria-label="Text" placeholder="Hint" />
+      <input id="disabled-input" aria-label="Disabled text" disabled value="Disabled" />
+      <button id="disabled-button" disabled>Disabled</button>
+      <textarea id="textarea" aria-label="Text area" placeholder="Hint"></textarea>
+      <textarea id="disabled-textarea" aria-label="Disabled text area" disabled></textarea>
+      <select id="select" aria-label="Select">
+        <option>Option</option>
+      </select>
+      <select id="disabled-select" aria-label="Disabled select" disabled>
+        <option>Disabled</option>
+      </select>
+      <select id="listbox" aria-label="Listbox" multiple size="4">
+        <optgroup id="optgroup" label="Group"><option id="option">Option</option></optgroup>
+      </select>
+      <input id="submit" type="submit" value="Submit" />
+    </fieldset>
+    <p id="recolored" class="recolored">
+      <input id="checkbox" type="checkbox" aria-label="Checkbox" />
+      <input id="radio" type="radio" aria-label="Radio" />
+      <input id="date" type="date" aria-label="Date" />
+      <input id="time" type="time" aria-label="Time" />
+      <input id="datetime-local" type="datetime-local" aria-label="Date and time" />
+      <input id="month" type="month" aria-label="Month" />
+      <input id="week" type="week" aria-label="Week" />
+      <input id="color" type="color" aria-label="Color" />
+      <input id="range" type="range" aria-label="Range" />
+      <input id="file" type="file" aria-label="File" />
+      <input id="image" type="image" alt="Image submit" />
+      <input id="disabled-date" type="date" aria-label="Disabled date" disabled />
+    </p>
+    <span id="system-disabled" class="system-disabled">System disabled color</span>
+    <div id="hidden" hidden>Hidden</div>
+    <img id="hidden-img" hidden alt="Hidden image" />
+    <svg id="svg" width="10" height="10" aria-label="Inline icon">
+      <circle cx="5" cy="5" r="4" />
+    </svg>
+    <details id="details">
+      <summary id="summary">Summary</summary>
+      <p>Details content</p>
+    </details>
+    <dialog id="dialog" aria-label="Oversized modal">
+      <button id="dialog-start">Start of dialog</button>
+      <div class="oversized">Oversized modal content</div>
+      <button id="dialog-end">End of dialog</button>
+    </dialog>
+    <h2 id="override" class="override">Unlayered override</h2>
+    <h2 id="layered" class="layered">Layered override</h2>
+    <div class="positioned">
+      <dialog id="nonmodal" open aria-label="Non-modal dialog">
+        <div class="tall">Non-modal content</div>
+      </dialog>
+    </div>
+  </body>
+</html>

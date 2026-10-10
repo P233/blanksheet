@@ -1,25 +1,23 @@
+/*! Blanksheet v2.0.0 | MIT | spec: blanksheet.css */
+
 /**
- * Blanksheet v1.0.2
  * https://github.com/P233/blanksheet
  *
- * A principled CSS reset — eliminates implicit
- * defaults, preserves text semantics, outputs a blank canvas.
+ * A CSS reset with an explicit baseline for humans and agents: each UA
+ * default in scope is blanked, normalized or kept as a documented survivor.
+ * Fonts, system colors and native controls still vary by engine and user
+ * settings.
  *
- * Principles:
- *   P1 — Eliminate implicit layout (margin, padding, vertical-align → zero)
- *   P2 — Preserve text semantics (bold, italic, color, underline, monospace → keep)
- *   P3 — Skip what developers always override (heading font-size, border, background → skip)
- *   P4 — Apply real-world universal defaults (box-sizing, list-style, font inherit, spinners → set)
- *   P5 — Normalize cross-browser inconsistencies (sub/sup, search, moz-focus, placeholder → fix)
- *
- * License: MIT
+ *   [B] Blank      zeroed or inherited
+ *   [N] Normalize  one shared value where blank is unreachable or unsafe
+ *   [S] Survivor   kept on purpose: internals | semantic | a11y | preference
  */
 
 @layer reset {
   /* ==========================================================================
    * Box Model
    *
-   * [P4] border-box is the modern sizing standard.
+   * [N] border-box — the conventional box model.
    * ======================================================================== */
 
   *,
@@ -31,19 +29,16 @@
   /* ==========================================================================
    * Root & Body
    *
-   * UA default: body — margin: 8px
-   *
-   * [P1] body margin: implicit layout.
-   * [P5] text-size-adjust: prevents mobile text inflation (Safari needs -webkit-).
-   *
-   * font-size and line-height are intentionally NOT set on :root.
-   * The UA defaults (16px / normal ~1.2) respect user browser preferences
-   * and provide readable text out of the box.
+   * [B] body margin (UA 8px).
+   * [N] -webkit-text-size-adjust — stops mobile text inflation. Safari reads
+   *   only this name; Chromium and Firefox Android (49+) alias it.
+   * [S:preference] html font and line-height, system colors, selection,
+   *   forced-colors overrides — user channels.
+   * [S:internals] scrollbars, spellcheck marks.
    * ======================================================================== */
 
-  :root {
+  html {
     -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
   }
 
   body {
@@ -53,14 +48,10 @@
   /* ==========================================================================
    * Sections
    *
-   * UA default: h1–h6 — font-size: 2em..0.67em, font-weight: bold, margin-block
-   *
-   * [P1] margin: implicit layout → reset.
-   * [P2] font-weight: bold → semantic (importance) → keep.
-   * [P3] font-size → always overridden → skip.
-   *
-   * Untouched: article, aside, footer, header, main, nav, section, hgroup
-   *            — structural only, no meaningful UA defaults.
+   * [B] h1–h6 margin and font-size — the level lives in the tag; the UA scale
+   *   also differs by engine version since the 2025 spec change.
+   * [S:semantic] heading bold — unstyled headings stay distinct from text.
+   * Untouched: article, aside, header, footer, main, nav, section, hgroup.
    * ======================================================================== */
 
   h1,
@@ -70,24 +61,16 @@
   h5,
   h6 {
     margin: 0;
+    font-size: inherit;
   }
 
   /* ==========================================================================
    * Grouping Content
    *
-   * UA default: p          — margin-block: 1em
-   *             blockquote — margin-block: 1em, margin-inline: 40px
-   *             pre        — margin-block: 1em, font-family: monospace
-   *             figure     — margin-block: 1em, margin-inline: 40px
-   *             hr         — margin-block: 0.5em, border
-   *             dl         — margin-block: 1em
-   *             dd         — margin-inline-start: 40px
-   *
-   * [P1] margin: implicit layout → reset.
-   * [P3] hr border: always overridden in practice → skip.
-   * [P2] pre monospace: semantic (code convention) → keep.
-   *
-   * Untouched: figcaption, dt, div, search — no meaningful UA defaults.
+   * [B] p, blockquote, figure, pre, hr, dl, dd margins.
+   * [N] hr — engines draw the inset border and its color differently; one
+   *   1px currentColor line on the block-start edge. Blank would hide it.
+   * Untouched: figcaption, dt, div, search.
    * ======================================================================== */
 
   p,
@@ -100,28 +83,44 @@
     margin: 0;
   }
 
+  hr {
+    color: inherit;
+    border: 0;
+    border-block-start: 1px solid;
+  }
+
   /* ==========================================================================
    * Text-level Semantics
    *
-   * [P2] All text-level visual defaults are semantic → keep.
-   *   a       — color, text-decoration (link identity)
-   *   strong  — font-weight (importance)
-   *   em      — font-style (emphasis)
-   *   small   — font-size (fine print)
-   *   del     — text-decoration (deletion)
-   *   mark    — background (highlight)
-   *   abbr    — text-decoration (abbreviation)
-   *   q       — quotes (quoted speech)
-   *   code, kbd, samp — font-family (code convention)
-   *
-   * [P5] sub/sup: normalize positioning (from Normalize.css) to prevent
-   *   line-height disruption across engines while preserving visual offset.
+   * [S:semantic] inline defaults carry author meaning: a color and underline
+   *   (W3C F73), strong/b weight, em/i/cite/dfn/var/address italic,
+   *   u/ins/abbr underline, s/del strike, small size, mark colors (fixed
+   *   yellow/black — mind dark themes), q quotes, code monospace.
+   * [N] b, strong: bolder — older Blink/WebKit in the matrix use bold
+   *   (light weights: 400 vs 700).
+   * [N] pre, code, kbd, samp — a two-item family list stops the 13px
+   *   monospace quirk. The quoted "monospace" is load-bearing: lightningcss
+   *   dedupes a bare pair (lightningcss#1221).
+   * [N] sub, sup — em offsets keep line height intact; size stays the UA's.
+   * [S:internals] ruby, rt, rp — engines size and wrap annotations
+   *   differently.
    * ======================================================================== */
+
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  pre,
+  code,
+  kbd,
+  samp {
+    font-family: monospace, "monospace";
+  }
 
   sub,
   sup {
     position: relative;
-    font-size: 75%;
     line-height: 0;
     vertical-align: baseline;
   }
@@ -137,12 +136,9 @@
   /* ==========================================================================
    * Lists
    *
-   * UA default: ul   — margin-block: 1em, padding-inline-start: 40px, list-style: disc
-   *             ol   — margin-block: 1em, padding-inline-start: 40px, list-style: decimal
-   *             menu — margin-block: 1em, padding-inline-start: 40px, list-style: disc
-   *
-   * [P1] margin, padding: implicit layout → reset.
-   * [P4] list-style: none — virtually always custom-built → reset.
+   * [B] ul, ol, menu margin, padding and markers.
+   * [N] list-style-type: "" rather than none — Safari drops list semantics
+   *   for none. Supported across the matrix; older engines show markers.
    * ======================================================================== */
 
   ul,
@@ -150,29 +146,25 @@
   menu {
     padding: 0;
     margin: 0;
-    list-style: none;
+    list-style-type: "";
   }
 
   /* ==========================================================================
    * Table
    *
-   * UA default: table   — border-spacing: 2px, border-collapse: separate
-   *             caption — text-align: center
-   *             th      — font-weight: bold, text-align: center, padding: 1px
-   *             td      — padding: 1px
-   *
-   * [P1] padding: implicit layout → reset.
-   * [P4] border-collapse: collapse — virtually always needed → set.
-   *
-   * border-spacing is not reset: it only applies under border-collapse: separate,
-   * and anyone using separate will define their own spacing.
-   * [P2] th font-weight, th/caption text-align: semantic → keep.
-   *
-   * Untouched: thead, tbody, tfoot, tr, colgroup, col — structural only.
+   * [B] th, td padding; border-spacing (would resurface under separate).
+   * [N] border-collapse: collapse.
+   * [N] text-indent: 0, border-color: currentColor — Safari 15.4 leaks
+   *   ancestor text-indent; Chrome 99 and Safari 15.4 paint gray borders.
+   *   Not inherit, which imports an ancestor's border-color.
+   * [S:semantic] th bold, th/caption centered.
    * ======================================================================== */
 
   table {
+    text-indent: 0;
+    border-spacing: 0;
     border-collapse: collapse;
+    border-color: currentColor;
   }
 
   th,
@@ -183,29 +175,44 @@
   /* ==========================================================================
    * Forms
    *
-   * UA default: button   — padding, border, background, text-align: center
-   *             input    — padding, border, background (system), color (system)
-   *             select   — padding, border, background (system)
-   *             textarea — padding, border, resize: both
-   *             fieldset — border: 2px groove, padding, margin-inline: 2px
-   *             legend   — padding-inline: 2px
+   * [B] padding, margin.
+   * [B] font, color, letter- and word-spacing inherit — controls opt out of
+   *   inheritance by UA design. text-transform inherits on label controls
+   *   only: on a field the shown value would differ from the submitted one.
+   *   text-align and text-indent keep UA values (centered button labels).
+   * [B]+[N] native chrome off, replaced by a 1px currentColor frame —
+   *   border/background devolve controls alike in every engine (CSS-UI-4);
+   *   the frame keeps empty fields and buttons recognizable. Unknown input
+   *   types fall on the framed side of :not(). Padding is the author's.
+   * [N] :disabled — color: inherit erases the UA grays while UA opacity dims
+   *   differ (Chrome select 0.7, iOS 0.4): one GrayText signal, opacity 1.
+   * [N] textarea vertical-align: bottom — the gap under it differs by engine.
+   * [N] ::placeholder — UA grays differ; same color as the input text.
+   *   Dimming is the author's call (and a contrast risk).
+   * [N] ::file-selector-button font — its own UA font would win.
+   * [N] search appearance: textfield — Safari 15.4 keeps the native search
+   *   field under the frame (WebKit's isControlStyled skips search fields).
+   * [B] fieldset border, padding, margin; min-inline-size: 0 (UA min-content
+   *   blocks flex/grid shrinking). legend padding.
    *
-   * [P1] margin, padding: implicit layout → reset.
-   * [P4] font/color: inherit — form elements don't inherit by default,
-   *   a UA quirk that trips up every developer → fix.
-   * [P3] border, background: always overridden in practice → skip.
-   *   Applies to all form controls including fieldset.
-   *   date, time, datetime-local, month, week, color, range
-   *   — always replaced entirely with custom components → skip.
-   * [P5] ::-moz-focus-inner: Firefox adds inner padding/border → fix.
-   * [P5] [type="search"]: WebKit non-standard appearance → fix.
-   * [P4] number spinners: virtually always custom-built → remove.
-   * [P5] ::placeholder: Firefox renders at reduced opacity, others don't → fix.
-   * [P5] :-moz-ui-invalid: Firefox adds red box-shadow on invalid inputs,
-   *   others don't → fix.
-   *
-   * Untouched: optgroup, form, label, output, datalist, option
-   *            — no meaningful UA defaults.
+   * [S:a11y] checkbox, radio — forced colors cannot restore a removed
+   *   appearance. The disabled rule is inert on them (iOS pins opacity 1).
+   * [S:a11y] focus indicators — never removed (W3C F78).
+   * [S:a11y] forced colors — the frame is a border the palette recolors.
+   * [S:internals] range, color, date, time, datetime-local, month, week —
+   *   engine-drawn; they revert color and disabled opacity so text stays
+   *   paired with the native field. Keep this list in step with :not().
+   * [S:internals] file, image — their text sits on the page and inherits
+   *   color; the file button keeps native colors and text-transform (its
+   *   label is engine text). Accepted: iOS no longer dims a disabled image.
+   * [S:internals] select arrow — the picker cue. iOS Safari before 26 drops
+   *   it once a background is set; macOS Safari keeps a rounded shape. Set
+   *   appearance: none for a custom arrow or square corners.
+   * [S:internals] number spinners, search ✕, input[list] indicator,
+   *   autofill, resize handle, listbox and popup option rendering (options
+   *   inherit the select color; recolored pages without color-scheme must
+   *   style them).
+   * Untouched: form, label, output, datalist.
    * ======================================================================== */
 
   button,
@@ -216,35 +223,86 @@
     margin: 0;
     font: inherit;
     color: inherit;
+    word-spacing: inherit;
+    letter-spacing: inherit;
   }
 
-  button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-
-  [type="search"],
-  [type="number"] {
-    appearance: textfield;
-  }
-
-  [type="search"]::-webkit-search-decoration,
-  [type="number"]::-webkit-inner-spin-button,
-  [type="number"]::-webkit-outer-spin-button {
-    appearance: none;
-  }
-
-  ::placeholder {
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: GrayText;
     opacity: 1;
   }
 
-  :-moz-ui-invalid {
-    box-shadow: none;
+  input:is(
+    [type="range"],
+    [type="color"],
+    [type="date"],
+    [type="time"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"]
+  ) {
+    color: revert;
+    opacity: revert;
+  }
+
+  button,
+  select,
+  textarea,
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="color"],
+    [type="file"],
+    [type="date"],
+    [type="time"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="image"]
+  ) {
+    background: none;
+    border: 1px solid;
+    border-radius: 0;
+  }
+
+  button,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    text-transform: inherit;
+  }
+
+  textarea {
+    vertical-align: bottom;
+  }
+
+  ::file-selector-button {
+    font: inherit;
+  }
+
+  ::placeholder {
+    color: inherit;
+    opacity: 1;
+  }
+
+  input[type="search"] {
+    appearance: textfield;
+  }
+
+  input[type="search"]::-webkit-search-decoration {
+    appearance: none;
   }
 
   fieldset {
+    min-inline-size: 0;
     padding: 0;
     margin: 0;
+    border: 0;
   }
 
   legend {
@@ -254,18 +312,12 @@
   /* ==========================================================================
    * Embedded / Media
    *
-   * UA default: img, video, audio, canvas, svg — display: inline (baseline gap)
-   *             svg    — overflow: hidden
-   *             iframe — display: inline (baseline gap), border: 2px inset
-   *
-   * [P1] vertical-align: bottom — closes the baseline gap (invisible
-   *   vertical space from text baseline alignment) without switching to
-   *   display: block, preserving inline flow for SVG icons in buttons/links.
-   * [P3] iframe border: always overridden in practice → skip.
-   * [P3] meter, progress — always replaced entirely
-   *   with custom components → skip.
-   *
-   * Untouched: picture, source, map, area — structural or hidden.
+   * [N] vertical-align: bottom — closes the baseline gap; display stays
+   *   inline, so [hidden] still works.
+   * [B] iframe border.
+   * [S:internals] meter, progress; svg overflow: hidden (clips to the
+   *   viewBox — set visible per graphic).
+   * Untouched: picture, source, map, area.
    * ======================================================================== */
 
   img,
@@ -279,34 +331,26 @@
     vertical-align: bottom;
   }
 
+  iframe {
+    border: 0;
+  }
+
   /* ==========================================================================
    * Interactive
    *
-   * UA default: summary — display: list-item (marker triangle)
-   *             dialog  — position: absolute, padding, border, background, color
-   *
-   * [P1] dialog padding: implicit layout → reset.
-   * [P3] dialog border, background, color: always restyled as a
-   *   complete visual component → skip.
-   * [P4] summary list-style: none — virtually always custom-built → reset.
+   * [N] dialog:modal max sizes: 100% — the UA calc((100% - 6px) - 2em) cap
+   *   silently limits author sizes; 100% keeps long content scrollable.
+   *   Modal only (non-modal has no UA max). Keep it a standalone rule:
+   *   engines without :modal (Chrome < 105, FF < 103, Safari < 15.6) drop
+   *   just this rule.
+   * [S:internals] dialog panel, modal ::backdrop, positioning — an unstyled
+   *   dialog stays readable and working.
+   * [S:internals] summary triangle — the expand cue. To remove: list-style:
+   *   none, plus ::-webkit-details-marker { display: none } for Safari < 18.4.
    * ======================================================================== */
 
-  dialog {
-    padding: 0;
-  }
-
-  summary {
-    list-style: none;
-  }
-
-  /*
-   * [P5] Safari < 18.4 does not support list-style: none on summary and
-   * renders the disclosure triangle via a proprietary pseudo-element.
-   * Safari 18.4 (March 2025) reimplemented it as a standard ::marker.
-   *
-   * TODO: Remove when Safari < 18.4 drops below 1% global share (~2027).
-   */
-  summary::-webkit-details-marker {
-    display: none;
+  dialog:modal {
+    max-inline-size: 100%;
+    max-block-size: 100%;
   }
 }
