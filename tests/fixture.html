@@ -10,6 +10,11 @@
           margin: 9px;
           font-size: 27px;
         }
+        .layered-select {
+          appearance: none;
+          padding: 6px 14px;
+          border-radius: 0;
+        }
       }
       html {
         color-scheme: light dark;
@@ -24,6 +29,11 @@
       .override {
         margin: 12px;
         font-size: 30px;
+      }
+      .override-select {
+        appearance: none;
+        padding: 6px 14px;
+        border-radius: 0;
       }
       .vertical {
         height: 60px;
@@ -97,6 +107,12 @@
       </select>
       <select id="disabled-select" aria-label="Disabled select" disabled>
         <option>Disabled</option>
+      </select>
+      <select id="override-select" class="override-select" aria-label="Unlayered select padding">
+        <option>Option</option>
+      </select>
+      <select id="layered-select" class="layered-select" aria-label="Layered select padding">
+        <option>Option</option>
       </select>
       <select id="listbox" aria-label="Listbox" multiple size="4">
         <optgroup id="optgroup" label="Group"><option id="option">Option</option></optgroup>

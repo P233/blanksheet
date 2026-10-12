@@ -6,6 +6,7 @@ import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+import { gzipSync } from "node:zlib";
 
 const exec = promisify(execFile);
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -36,7 +37,10 @@ test("a clean npm pack builds its CSS entry and includes the migration guide", a
     "blanksheet.min.css",
     "package.json"
   ]);
-  assert.ok((await readFile(join(directory, manifest.style), "utf8")).length > 0);
+  const minified = await readFile(join(directory, manifest.style));
+  assert.ok(minified.length > 0);
+  const gzipBytes = gzipSync(minified).length;
+  assert.ok(gzipBytes < 1000, `README's <1KB gzip claim: received ${gzipBytes} bytes`);
   assert.ok(
     (await readFile(join(directory, "blanksheet.css"), "utf8")).includes(
       `Blanksheet v${manifest.version}`

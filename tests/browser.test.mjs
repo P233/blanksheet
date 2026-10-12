@@ -199,6 +199,16 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
             expectStyle("fieldset", { minInlineSize: "0px" });
             expectStyle("override", { marginTop: "12px", fontSize: "30px" });
             expectStyle("layered", { marginTop: "9px", fontSize: "27px" });
+            for (const id of ["override-select", "layered-select"]) {
+              expectStyle(id, {
+                appearance: "none",
+                paddingTop: "6px",
+                paddingRight: "14px",
+                paddingBottom: "6px",
+                paddingLeft: "14px",
+                borderRadius: "0px"
+              });
+            }
             expectStyle("nonmodal", { maxInlineSize: "none", maxBlockSize: "none" });
             for (const id of survivorIds) {
               const { color, opacity, ...chrome } = native[id];
