@@ -10,9 +10,10 @@
     "prepare": "husky",
     "lint:check": "stylelint blanksheet.css",
     "lint:fix": "stylelint --fix blanksheet.css",
-    "format:check": "prettier --check README.md AGENTS.md CLAUDE.md CHANGELOG.md package.json pnpm-workspace.yaml kitchen-sink.html tests",
+    "format:check": "prettier --check README.md AGENTS.md CLAUDE.md CHANGELOG.md package.json pnpm-workspace.yaml kitchen-sink.html tests bench",
     "build": "lightningcss --minify blanksheet.css -o blanksheet.min.css",
     "test": "npm run build && node --test tests/*.test.mjs",
+    "bench": "node bench/resets.mjs",
     "prepack": "npm run build"
   },
   "keywords": [
@@ -55,7 +56,7 @@
       "prettier --write"
     ],
     "*.css": [
-      "stylelint --fix"
+      "stylelint --fix --allow-empty-input"
     ]
   }
 }

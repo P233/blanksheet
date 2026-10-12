@@ -3,3 +3,4 @@ blanksheet.min.css
 *.tgz
 .DS_Store
 .vscode
+bench/.cache/
