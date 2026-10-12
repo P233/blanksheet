@@ -132,7 +132,7 @@ Maintainers' source of truth for the retained defaults and native channels withi
 
 Single file: `blanksheet.css`. Everything inside one `@layer reset` block — lowest cascade priority. The commented source is the spec, shipped next to the minified entry (whose `/*! */` banner points to it); an agent can read the whole contract in one pass.
 
-Downstream note: the Rebar editor maintains a per-element manifest of this stylesheet in its own repo, pinned to its vendored copy by a sync test — rule changes here surface there at re-vendor time.
+Downstream note: the Rebar editor maintains a per-element manifest of this stylesheet in its own repo, pinned to its vendored copy by a sync test — rule changes here surface there at re-vendor time. The peiwen.lu blog hosts a preview at `/project/blanksheet/`, derived from `kitchen-sink.html` with a copy of the released CSS; refresh it after each release.
 
 ```
 @layer reset {
