@@ -1,7 +1,7 @@
 {
   "name": "blanksheet",
   "version": "2.0.0",
-  "description": "A CSS reset with an explicit baseline for humans and agents: blanked defaults, normalized rules, and documented survivors.",
+  "description": "A CSS reset that gives humans and agents a blank sheet to start a project on: blanked defaults, normalized rules and documented survivors.",
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "main": "blanksheet.min.css",

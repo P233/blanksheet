@@ -3,13 +3,14 @@
 /**
  * https://github.com/P233/blanksheet
  *
- * A CSS reset with an explicit baseline for humans and agents: each UA
- * default in scope is blanked, normalized or kept as a documented survivor.
- * Fonts, system colors and native controls still vary by engine and user
- * settings.
+ * A CSS reset that gives humans and agents a blank sheet to start a project
+ * on: each UA default in scope is blanked, normalized or kept as a documented
+ * survivor. Fonts, system colors and native controls still vary by engine and
+ * user settings.
  *
  *   [B] Blank      zeroed or inherited
- *   [N] Normalize  one shared value where blank is unreachable or unsafe
+ *   [N] Normalize  one shared policy where a blank is unsafe or engines
+ *                  disagree; not identical pixels
  *   [S] Survivor   kept on purpose: internals | semantic | a11y | preference
  */
 
@@ -181,7 +182,7 @@
    *   only: on a field the shown value would differ from the submitted one.
    *   text-align and text-indent keep UA values (centered button labels).
    * [B]+[N] native chrome off, replaced by a 1px currentColor frame —
-   *   border/background devolve controls alike in every engine (CSS-UI-4);
+   *   border/background use CSS-UI-4 devolution; native exceptions are below;
    *   the frame keeps empty fields and buttons recognizable. Unknown input
    *   types fall on the framed side of :not(). Padding is the author's.
    * [N] :disabled — color: inherit erases the UA grays while UA opacity dims
@@ -197,7 +198,8 @@
    *
    * [S:a11y] checkbox, radio — forced colors cannot restore a removed
    *   appearance. The disabled rule is inert on them (iOS pins opacity 1).
-   * [S:a11y] focus indicators — never removed (W3C F78).
+   * [S:a11y] focus indicators — retained; author replacements must stay
+   *   visible (W3C F78).
    * [S:a11y] forced colors — the frame is a border the palette recolors.
    * [S:internals] range, color, date, time, datetime-local, month, week —
    *   engine-drawn; they revert color and disabled opacity so text stays
@@ -206,8 +208,9 @@
    *   color; the file button keeps native colors and text-transform (its
    *   label is engine text). Accepted: iOS no longer dims a disabled image.
    * [S:internals] select arrow — the picker cue. iOS Safari before 26 drops
-   *   it once a background is set; macOS Safari keeps a rounded shape. Set
-   *   appearance: none for a custom arrow or square corners.
+   *   it once a background is set; macOS Safari keeps a rounded shape and
+   *   ignores padding. Set appearance: none for a custom arrow, square
+   *   corners or padding.
    * [S:internals] number spinners, search ✕, input[list] indicator,
    *   autofill, resize handle, listbox and popup option rendering (options
    *   inherit the select color; recolored pages without color-scheme must
