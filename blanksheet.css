@@ -209,8 +209,8 @@
    *   label is engine text). Accepted: iOS no longer dims a disabled image.
    * [S:internals] select arrow — the picker cue. iOS Safari before 26 drops
    *   it once a background is set; macOS Safari keeps a rounded shape and
-   *   ignores padding. Set appearance: none for a custom arrow, square
-   *   corners or padding.
+   *   ignores padding. appearance: none applies corners and padding
+   *   everywhere but drops the arrow: components draw their own.
    * [S:internals] number spinners, search ✕, input[list] indicator,
    *   autofill, resize handle, listbox and popup option rendering (options
    *   inherit the select color; recolored pages without color-scheme must

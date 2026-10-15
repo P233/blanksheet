@@ -42,7 +42,7 @@ Scope: the browser defaults for flow content and form controls in the HTML stand
 
 ## An Unstyled Page
 
-- Text fields, buttons and selects are transparent, framed in the text color, with no padding. Selects keep their arrow (except in iOS Safari before 26); set `appearance: none` for a custom arrow, square corners or padding (Safari ignores padding on a native select).
+- Text fields, buttons and selects are transparent, framed in the text color, with no padding. Selects keep their arrow (except in iOS Safari before 26), and macOS Safari also keeps a native select's rounded corners and ignores its padding. With `appearance: none`, every browser applies your corner radius and padding but also drops the arrow, which you then draw yourself.
 - Placeholders take the input's text color; dim them to tell a hint from a value.
 - Headings are body-size and bold. Lists lose their markers but keep their semantics.
 - Date fields and the file button keep their native colors, which follow `color-scheme`. The select dropdown's popup does too, but its options inherit the select's text color. On a dark theme, set `color-scheme: dark`; if the page recolors text without a matching `color-scheme`, style `option` as well.
@@ -60,7 +60,7 @@ An agent writes CSS for a page it cannot fully see, on top of defaults it has to
 
 It is a starting point, not an accessibility guarantee: restyled components still need checking in a browser.
 
-Point the agent at the contract in the project's agent instructions:
+Point the agent at the contract in the project's agent instructions. With the CDN, use `https://cdn.jsdelivr.net/npm/blanksheet@2/blanksheet.css` as the path:
 
 ```md
 CSS starts from Blanksheet: read node_modules/blanksheet/blanksheet.css before writing styles, keep component CSS unlayered or in a layer after `reset`, keep keyboard focus visible and check the result in a browser.

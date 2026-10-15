@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Stricter color lint** — stylelint rejects named colors and color functions as well as hex colors; system colors and `currentColor` still pass.
 - **Wider browser regressions** — every reset declaration has an assertion that fails when it is removed, apart from rules whose effect only floor engines or mobile browsers show. Survivors such as link color and underline, `th`/`caption` alignment and listbox alignment are compared with the engine's own value.
+- **Select override documented** — README and the source comments state that `appearance: none` also drops the select arrow and that macOS Safari keeps a native select's rounded corners as well as ignoring its padding. README gives the CDN path of the commented source for agent instructions.
 
 ## [2.0.0] - 2026-10-12
 
