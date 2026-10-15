@@ -62,6 +62,9 @@
       .recolored {
         color: rgb(200, 0, 0);
       }
+      .uppercase {
+        text-transform: uppercase;
+      }
     </style>
   </head>
   <body id="body">
@@ -70,10 +73,17 @@
     <h1 id="heading">Heading</h1>
     <p id="paragraph">
       Body <strong id="strong">strong</strong> <em id="em">emphasis</em>
-      <a id="link" href="#paragraph">link</a> <code id="code">code</code>
+      <a id="link" href="#paragraph">link</a> <code id="code">code</code> <kbd id="kbd">kbd</kbd>
+      <samp id="samp">samp</samp>
     </p>
     <p class="light-weight"><strong id="light-strong">Strong at light weight</strong></p>
     <pre id="pre">preformatted</pre>
+    <blockquote id="blockquote">Quote</blockquote>
+    <figure id="figure">Figure</figure>
+    <dl id="dl">
+      <dt>Term</dt>
+      <dd id="dd">Definition</dd>
+    </dl>
     <p>A<sub id="sub">sub</sub>B<sup id="sup">sup</sup></p>
     <hr id="hr" />
     <div class="vertical"><hr id="vertical-hr" /></div>
@@ -118,7 +128,18 @@
         <optgroup id="optgroup" label="Group"><option id="option">Option</option></optgroup>
       </select>
       <input id="submit" type="submit" value="Submit" />
+      <input id="search" type="search" aria-label="Search" />
     </fieldset>
+    <p class="uppercase">
+      <button id="upper-button" type="button">Button</button>
+      <select id="upper-select" aria-label="Uppercase select">
+        <option>Option</option>
+      </select>
+      <input id="upper-input-button" type="button" value="Input button" />
+      <input id="upper-submit" type="submit" value="Submit" />
+      <input id="upper-reset" type="reset" value="Reset" />
+      <input id="upper-text" aria-label="Uppercase text" value="Value" />
+    </p>
     <p id="recolored" class="recolored">
       <input id="checkbox" type="checkbox" aria-label="Checkbox" />
       <input id="radio" type="radio" aria-label="Radio" />
@@ -136,9 +157,18 @@
     <span id="system-disabled" class="system-disabled">System disabled color</span>
     <div id="hidden" hidden>Hidden</div>
     <img id="hidden-img" hidden alt="Hidden image" />
-    <svg id="svg" width="10" height="10" aria-label="Inline icon">
-      <circle cx="5" cy="5" r="4" />
-    </svg>
+    <p>
+      <img id="img" alt="" />
+      <video id="video"></video>
+      <audio id="audio"></audio>
+      <canvas id="canvas" width="10" height="10"></canvas>
+      <svg id="svg" width="10" height="10" aria-label="Inline icon">
+        <circle cx="5" cy="5" r="4" />
+      </svg>
+      <iframe id="iframe" title="Embedded frame"></iframe>
+      <embed id="embed" />
+      <object id="object" aria-label="Embedded object"></object>
+    </p>
     <details id="details">
       <summary id="summary">Summary</summary>
       <p>Details content</p>

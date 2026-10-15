@@ -43,6 +43,7 @@ const properties = [
   "letterSpacing",
   "wordSpacing",
   "textTransform",
+  "textDecorationLine",
   "borderCollapse",
   "borderSpacing",
   "textIndent",
@@ -50,6 +51,8 @@ const properties = [
   "maxInlineSize",
   "maxBlockSize",
   "position",
+  "top",
+  "bottom",
   "overflowX",
   "overflowY"
 ];
@@ -71,6 +74,28 @@ const nativeChrome = [
   "backgroundColor",
   "borderRadius"
 ];
+// Survivor defaults compared against the engine's own value; keywords like -webkit-center vary.
+const keptDefaults = {
+  link: ["color", "textDecorationLine"],
+  th: ["fontWeight", "textAlign"],
+  caption: ["textAlign"],
+  sub: ["fontSize"],
+  sup: ["fontSize"],
+  svg: ["overflowX", "overflowY"],
+  listbox: ["verticalAlign"]
+};
+const nativeProperties = {
+  ...Object.fromEntries(survivorIds.map((id) => [id, [...nativeChrome, "color", "opacity"]])),
+  ...keptDefaults
+};
+const controlIds = ["button", "input", "textarea", "select", "search"];
+const noMargin = { marginTop: "0px", marginRight: "0px", marginBottom: "0px", marginLeft: "0px" };
+const noPadding = {
+  paddingTop: "0px",
+  paddingRight: "0px",
+  paddingBottom: "0px",
+  paddingLeft: "0px"
+};
 
 for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit })) {
   // macOS WebKit uses Option-Tab to include buttons in native keyboard navigation.
@@ -96,9 +121,9 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
             t.after(() => page.close());
             await page.setContent(fixture);
             const native = await page.evaluate(
-              ({ ids, properties }) => ({
+              (nativeProperties) => ({
                 ...Object.fromEntries(
-                  ids.map((id) => {
+                  Object.entries(nativeProperties).map(([id, properties]) => {
                     const computed = getComputedStyle(document.getElementById(id));
                     return [
                       id,
@@ -113,7 +138,7 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
                     .color
                 }
               }),
-              { ids: survivorIds, properties: [...nativeChrome, "color", "opacity"] }
+              nativeProperties
             );
             await page.addStyleTag({ content: css });
 
@@ -129,12 +154,19 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
                 const computed = getComputedStyle(document.getElementById(id), "::placeholder");
                 styles[`${id}::placeholder`] = { color: computed.color, opacity: computed.opacity };
               }
+              for (const pseudo of ["::before", "::after"]) {
+                styles[`paragraph${pseudo}`] = {
+                  boxSizing: getComputedStyle(document.getElementById("paragraph"), pseudo)
+                    .boxSizing
+                };
+              }
               const fileButton = getComputedStyle(
                 document.getElementById("file"),
                 "::file-selector-button"
               );
               styles["file::file-selector-button"] = {
                 color: fileButton.color,
+                fontFamily: fileButton.fontFamily,
                 fontSize: fileButton.fontSize
               };
               return { styles, isForcedColors: matchMedia("(forced-colors: active)").matches };
@@ -150,28 +182,81 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
               }
             };
 
+            for (const id of ["paragraph", "paragraph::before", "paragraph::after"])
+              expectStyle(id, { boxSizing: "border-box" });
+            for (const id of [
+              "body",
+              "paragraph",
+              "blockquote",
+              "figure",
+              "pre",
+              "hr",
+              "dl",
+              "dd",
+              "list",
+              "ordered",
+              "menu",
+              "fieldset"
+            ])
+              expectStyle(id, noMargin);
             expectStyle("heading", {
               fontSize: styles.body.fontSize,
               fontWeight: "700",
               marginTop: "0px"
             });
-            for (const id of ["code", "pre"]) expectStyle(id, { fontSize: styles.body.fontSize });
+            for (const id of ["code", "pre", "kbd", "samp"])
+              expectStyle(id, { fontSize: styles.body.fontSize });
             expectStyle("strong", { fontWeight: "700" });
             expectStyle("light-strong", { fontWeight: "400" });
             expectStyle("em", { fontStyle: "italic" });
-            for (const id of ["button", "input", "textarea", "select"]) {
+            for (const id of ["sub", "sup"])
               expectStyle(id, {
+                position: "relative",
+                lineHeight: "0px",
+                verticalAlign: "baseline"
+              });
+            for (const [id, side, offset] of [
+              ["sub", "bottom", -0.25],
+              ["sup", "top", -0.5]
+            ]) {
+              const ratio = parseFloat(styles[id][side]) / parseFloat(styles[id].fontSize);
+              assert.ok(Math.abs(ratio - offset) < 0.01, `${id}.${side}: ${styles[id][side]}`);
+            }
+            for (const id of ["th", "td", "legend", "fieldset"]) expectStyle(id, noPadding);
+            for (const id of controlIds) {
+              expectStyle(id, {
+                ...noMargin,
+                ...noPadding,
+                fontFamily: styles.body.fontFamily,
+                fontSize: styles.body.fontSize,
                 wordSpacing: styles.body.wordSpacing,
                 letterSpacing: styles.body.letterSpacing
               });
+              if (!isForcedColors) expectStyle(id, { color: styles.body.color });
             }
-            for (const id of ["input", "textarea", "button", "submit", "select"]) {
+            for (const id of survivorIds) expectStyle(id, { ...noMargin, ...noPadding });
+            // The paragraph has no background; forced colors rewrite only the RGB of a transparent one.
+            for (const id of ["input", "textarea", "button", "submit", "select", "search"]) {
               expectStyle(id, {
+                backgroundColor: styles.paragraph.backgroundColor,
                 borderTopWidth: "1px",
                 borderTopStyle: "solid",
                 borderTopColor: styles[id].color
               });
             }
+            // WebKit keeps the drop-down select's rounded shape until appearance: none (override-select).
+            for (const id of ["input", "textarea", "button", "submit", "listbox", "search"])
+              expectStyle(id, { borderRadius: "0px" });
+            expectStyle("search", { appearance: "textfield" });
+            for (const id of [
+              "upper-button",
+              "upper-select",
+              "upper-input-button",
+              "upper-submit",
+              "upper-reset"
+            ])
+              expectStyle(id, { textTransform: "uppercase" });
+            expectStyle("upper-text", { textTransform: "none" });
             for (const id of ["input", "textarea"]) {
               expectStyle(`${id}::placeholder`, { opacity: "1" });
               if (!isForcedColors) expectStyle(`${id}::placeholder`, { color: styles[id].color });
@@ -188,7 +273,11 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
             for (const id of ["hidden", "hidden-img"]) expectStyle(id, { display: "none" });
             for (const id of ["list", "ordered", "menu"])
               expectStyle(id, { listStyleType: '""', paddingLeft: "0px" });
-            expectStyle("hr", { borderTopWidth: "1px", borderTopColor: styles.hr.color });
+            expectStyle("hr", {
+              color: styles.body.color,
+              borderTopWidth: "1px",
+              borderTopColor: styles.hr.color
+            });
             expectStyle("vertical-hr", { borderTopWidth: "0px", borderRightWidth: "1px" });
             expectStyle("table", {
               borderCollapse: "collapse",
@@ -210,13 +299,27 @@ for (const [engine, browserType] of Object.entries({ chromium, firefox, webkit }
               });
             }
             expectStyle("nonmodal", { maxInlineSize: "none", maxBlockSize: "none" });
+            for (const id of [
+              "img",
+              "video",
+              "audio",
+              "canvas",
+              "svg",
+              "iframe",
+              "embed",
+              "object"
+            ])
+              expectStyle(id, { verticalAlign: "bottom" });
+            expectStyle("iframe", { borderTopWidth: "0px" });
             for (const id of survivorIds) {
               const { color, opacity, ...chrome } = native[id];
               expectStyle(id, nativeColorIds.includes(id) ? { ...chrome, color, opacity } : chrome);
             }
+            for (const id of Object.keys(keptDefaults)) expectStyle(id, native[id]);
             for (const id of ["file", "image"]) expectStyle(id, { color: styles.recolored.color });
             expectStyle("file::file-selector-button", {
               color: native["file::file-selector-button"].color,
+              fontFamily: styles.body.fontFamily,
               fontSize: styles.body.fontSize
             });
             assert.equal(isForcedColors, mode === "forced-colors");
