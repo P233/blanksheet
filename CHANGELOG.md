@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Stricter color lint** — stylelint rejects named colors and color functions as well as hex colors; system colors and `currentColor` still pass.
 - **Wider browser regressions** — every reset declaration has an assertion that fails when it is removed, apart from rules whose effect only floor engines or mobile browsers show. Survivors such as link color and underline, `th`/`caption` alignment and listbox alignment are compared with the engine's own value.
 
 ## [2.0.0] - 2026-10-12

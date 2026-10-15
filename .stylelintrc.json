@@ -11,6 +11,20 @@
       "-webkit-font-smoothing",
       "-moz-osx-font-smoothing"
     ],
-    "color-no-hex": true
+    "color-no-hex": true,
+    "color-named": "never",
+    "function-disallowed-list": [
+      "rgb",
+      "rgba",
+      "hsl",
+      "hsla",
+      "hwb",
+      "lab",
+      "lch",
+      "oklab",
+      "oklch",
+      "color",
+      "color-mix"
+    ]
   }
 }

@@ -164,7 +164,7 @@ Syntax targets: Chrome 99+, Firefox 97+, Safari 15.4+ (`<dialog>` itself needs F
 
 ## Toolchain
 
-- **stylelint** (`stylelint-config-recess-order` + `stylelint-prettier`) — lints and formats `blanksheet.css` on pre-commit; also rejects `!important`, named behavioral additions and hex colors. Other aesthetic constants still need review.
+- **stylelint** (`stylelint-config-recess-order` + `stylelint-prettier`) — lints and formats `blanksheet.css` on pre-commit; also rejects `!important`, named behavioral additions and color literals (hex, named colors, color functions; system colors and `currentColor` pass). Other aesthetic constants, such as lengths, radii and font stacks, still need review.
 - **lightningcss-cli** — builds `blanksheet.min.css` via `pnpm build`. Only the `/*! … */` banner survives minification; it carries the version and points readers of the minified entry to the spec, so bump it with `package.json` (the packaging test checks they agree). Two minifier-sensitive spots are load-bearing: the quotes in `font-family: monospace, "monospace"` (prevents dedup, lightningcss#1221) and `dialog:modal` staying a standalone rule (merged into a selector list, engines without `:modal` would drop the whole list). Verify both survive in the minified output after any lightningcss upgrade.
 - **husky + lint-staged** — before every commit, runs `stylelint --fix` on staged CSS and `prettier --write` on staged html/md/json/yaml/mjs; `.prettierignore` keeps `pnpm-lock.yaml` out, and both it and `.stylelintignore` keep the pinned Meyer snapshot under `bench/vendor/` byte-for-byte
 - **pnpm 11** — pinned in `package.json`; `pnpm-workspace.yaml` explicitly permits the `lightningcss-cli` native install script via `allowBuilds`.
