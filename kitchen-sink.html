@@ -247,7 +247,12 @@ Preformatted
               value="Disabled input"
               disabled
             />
-            <select id="disabled-select" name="disabled-select" disabled>
+            <select
+              id="disabled-select"
+              name="disabled-select"
+              aria-label="Disabled select"
+              disabled
+            >
               <option>Disabled select</option>
             </select>
             <button type="button" disabled>Disabled button</button><br /><br />
@@ -349,11 +354,11 @@ Preformatted
           <fieldset>
             <legend>Meters, Progress & Buttons</legend>
 
-            <label>Meter:</label>
-            <meter value="0.6">60%</meter><br /><br />
+            <label for="meter">Meter:</label>
+            <meter id="meter" value="0.6">60%</meter><br /><br />
 
-            <label>Progress:</label>
-            <progress value="70" max="100">70%</progress><br /><br />
+            <label for="progress">Progress:</label>
+            <progress id="progress" value="70" max="100">70%</progress><br /><br />
 
             <button type="submit">Submit Button</button>
             <button type="reset">Reset Button</button>
@@ -389,16 +394,9 @@ Preformatted
           <area shape="circle" coords="150,150,50" href="#" alt="Circle area" />
         </map>
 
-        <audio controls>
-          <source src="audio.mp3" type="audio/mpeg" />
-          Your browser does not support audio.
-        </audio>
+        <audio controls>Your browser does not support audio.</audio>
 
-        <video width="320" height="240" controls>
-          <source src="video.mp4" type="video/mp4" />
-          <track kind="subtitles" src="subtitles.vtt" srclang="en" label="English" />
-          Your browser does not support video.
-        </video>
+        <video width="320" height="240" controls>Your browser does not support video.</video>
 
         <canvas id="myCanvas" width="200" height="100">
           Your browser does not support canvas.
@@ -410,11 +408,23 @@ Preformatted
 
         <iframe src="about:blank" width="300" height="150" title="Iframe example"></iframe>
 
-        <object data="https://placehold.co/200x100" type="image/png" width="200" height="100">
+        <object
+          data="https://placehold.co/200x100"
+          type="image/png"
+          width="200"
+          height="100"
+          title="Object example"
+        >
           Object fallback text
         </object>
 
-        <embed type="image/png" src="https://placehold.co/200x100" width="200" height="100" />
+        <embed
+          type="image/png"
+          src="https://placehold.co/200x100"
+          width="200"
+          height="100"
+          title="Embed example"
+        />
       </section>
 
       <!-- Section 7: Editable Content -->
